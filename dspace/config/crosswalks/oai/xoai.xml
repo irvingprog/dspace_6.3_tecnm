@@ -82,6 +82,14 @@
                 This contexts complies with OpenAIRE Guidelines for Literature Repositories v3.0.
             </Description>
         </Context>
+        <Context baseurl="conacyt" name="Conacyt Context">
+            <Filter ref="defaultFilter"/>
+            <!-- Metadata Formats -->
+            <Format ref="conacytFormat"/>
+            <Description>
+                Conacyt context
+            </Description>
+        </Context>
     </Contexts>
 
 
@@ -166,6 +174,14 @@
             <XSLT>metadataFormats/junii2.xsl</XSLT>
             <Namespace>http://irdb.nii.ac.jp/oai</Namespace>
             <SchemaLocation>http://irdb.nii.ac.jp/oai/junii2-3-1.xsd</SchemaLocation>
+        </Format>
+        <!-- Format para conacyt -->
+        <Format id="conacytFormat">
+            <Prefix>oai_dc</Prefix>
+            <XSLT>metadataFormats/oai_dc_conacyt.xsl</XSLT>
+            <Namespace>http://www.openarchives.org/OAI/2.0/oai_dc/</Namespace>
+            <SchemaLocation>http://www.openarchives.org/OAI/2.0/oai_dc.xsd</SchemaLocation>
+            <Filter ref="uketdDcConacytFilter"/>
         </Format>
     </Formats>
 
@@ -317,6 +333,13 @@
             </Definition>
         </Filter>
 
+        <!-- Filtro para conacyt hace referencia a customCondition -->
+        <Filter id="uketdDcConacytFilter">
+            <Definition>
+                <Custom ref="thesisDocumentTypeConditionForConacyt"/>
+            </Definition>
+        </Filter>
+
         <!-- This condition determines if an Item has a "dc.type" field
              which contains "Thesis". -->
         <CustomCondition id="thesisDocumentTypeCondition">
@@ -325,6 +348,35 @@
                 <string name="field">dc.type</string>
                 <string name="operator">contains</string>
                 <string name="value">Thesis</string>
+            </Configuration>
+        </CustomCondition>
+        <!-- Condiciones de filtrado para Conacyt -->
+        <CustomCondition id="thesisDocumentTypeConditionForConacyt2">
+            <Class>org.dspace.xoai.filter.DSpaceAtLeastOneMetadataFilter</Class>
+            <Configuration>
+                <string name="field">dc.type.conacyt</string>
+                <string name="operator">contains</string>
+                <list name="values">
+                    <string>article</string>
+                    <string>bachelorThesis</string>
+                    <string>masterThesis</string>
+                    <string>doctoralThesis</string>
+                </list>
+            </Configuration>
+        </CustomCondition>
+
+        <!-- Actual condicion -->
+        <CustomCondition id="thesisDocumentTypeConditionForConacyt">
+            <Class>org.dspace.xoai.filter.DSpaceAtLeastOneMetadataFilter</Class>
+            <Configuration>
+                <string name="field">dc.type</string>
+                <string name="operator">contains</string>
+                <list name="values">
+                    <string>Articulo</string>
+                    <string>Tesis de Maestría</string>
+                    <string>Tesis Doctoral</string>
+                    <string>Tesis de Licenciatura</string>
+                </list>
             </Configuration>
         </CustomCondition>
 
