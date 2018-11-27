@@ -86,10 +86,10 @@ public class DefaultEmbargoSetter implements EmbargoSetter
      * @param item the item to embargo
      */
     @Override
-    public void setEmbargo(Context context, Item item)
+    public void setEmbargo(Context context, Item item, DCDate liftDate)
         throws SQLException, AuthorizeException
     {
-        DCDate liftDate = EmbargoServiceFactory.getInstance().getEmbargoService().getEmbargoTermsAsDate(context, item);
+        //DCDate liftDate = EmbargoServiceFactory.getInstance().getEmbargoService().getEmbargoTermsAsDate(context, item);
         for (Bundle bn : item.getBundles())
         {
             // Skip the LICENSE and METADATA bundles, they stay world-readable

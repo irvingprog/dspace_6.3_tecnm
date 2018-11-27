@@ -100,7 +100,7 @@ public class EmbargoServiceImpl implements EmbargoService
             itemService.addMetadata(context, item, lift_schema, lift_element, lift_qualifier, null, slift);
             log.info("Set embargo on Item "+item.getHandle()+", expires on: "+slift);
 
-            setter.setEmbargo(context, item);
+            setter.setEmbargo(context, item,myLift);
 
             itemService.update(context, item);
         }

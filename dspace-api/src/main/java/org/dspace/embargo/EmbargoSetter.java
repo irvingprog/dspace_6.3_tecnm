@@ -52,8 +52,9 @@ public interface EmbargoSetter
      *
      * @param context the DSpace context
      * @param item the item to embargo
+     * @param liftDate
      */
-    public void setEmbargo(Context context, Item item)
+    public void setEmbargo(Context context, Item item, DCDate liftDate)
         throws SQLException, AuthorizeException;
 
     /**
